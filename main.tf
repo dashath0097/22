@@ -5,10 +5,20 @@ provider "aws" {
 variable "spacelift_access_key" {}
 variable "spacelift_secret_key" {}
 
+terraform {
+  required_providers {
+    spacelift = {
+      source  = "spacelift-io/spacelift"
+      version = "~> 1.0"  # Use the latest compatible version
+    }
+  }
+}
+
 provider "spacelift" {
   access_key = var.spacelift_access_key
   secret_key = var.spacelift_secret_key
 }
+
 
 resource "spacelift_worker_pool" "private_pool" {
   name        = "private-worker-pool"
